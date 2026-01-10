@@ -10,8 +10,6 @@ import {
     X,
     Search,
     Bell,
-    User,
-    ChevronDown,
     Home,
     BookOpen,
     BarChart3,
@@ -33,16 +31,18 @@ export function Header() {
     }, [])
 
     const navLinks = [
-        { label: 'Home', href: '#', icon: Home },
+        { label: 'Home', href: '/', icon: Home },
         { label: 'Features', href: '#features', icon: Sparkles },
         { label: 'Analyzer', href: '#scam-analyzer', icon: Search },
         { label: 'Learn', href: '#education', icon: BookOpen },
         { label: 'Stats', href: '#impact', icon: BarChart3 },
-        { label: 'Help', href: '#help', icon: HelpCircle },
+        { label: 'Help', href: '#education', icon: HelpCircle },
     ]
 
     const scrollToSection = (href: string) => {
-        if (href.startsWith('#')) {
+        if (href === '/' || href === '#') {
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+        } else if (href.startsWith('#')) {
             const element = document.querySelector(href)
             if (element) {
                 element.scrollIntoView({ behavior: 'smooth' })

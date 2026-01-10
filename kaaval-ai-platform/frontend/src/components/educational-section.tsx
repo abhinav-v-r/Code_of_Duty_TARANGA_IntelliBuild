@@ -18,7 +18,8 @@ import {
     CheckCircle2,
     Zap,
     Clock,
-    Users
+    Users,
+    Eye
 } from 'lucide-react'
 import { motion } from 'framer-motion'
 

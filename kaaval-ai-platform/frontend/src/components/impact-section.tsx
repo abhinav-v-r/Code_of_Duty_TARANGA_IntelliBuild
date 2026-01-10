@@ -77,7 +77,7 @@ export function ImpactSection() {
     ]
 
     return (
-        <section className="py-16 md:py-24 bg-gradient-to-br from-primary-50 via-background to-primary-50/50 dark:from-primary-950/30 dark:via-background dark:to-primary-900/20">
+        <section id="impact" className="py-16 md:py-24 bg-gradient-to-br from-primary-50 via-background to-primary-50/50 dark:from-primary-950/30 dark:via-background dark:to-primary-900/20">
             <div className="container mx-auto px-4">
                 <div className="max-w-7xl mx-auto">
                     {/* Section Header */}

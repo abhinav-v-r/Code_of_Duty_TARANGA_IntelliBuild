@@ -22,9 +22,7 @@ import {
     Mail,
     Zap,
     Eye,
-    Lock,
-    TrendingDown,
-    TrendingUp
+    Lock
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { api } from '@/lib/api'

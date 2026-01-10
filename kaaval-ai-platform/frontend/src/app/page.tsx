@@ -12,11 +12,9 @@ export default function HomePage() {
             <Header />
             <main className="min-h-screen">
                 <HeroSection />
-                <div id="features" />
                 <ScamAnalyzer />
                 <FeatureCards />
                 <EducationalSection />
-                <div id="impact" />
                 <ImpactSection />
                 <Footer />
             </main>
