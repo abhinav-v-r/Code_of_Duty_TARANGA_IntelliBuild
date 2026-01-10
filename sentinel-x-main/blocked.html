@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Site Blocked</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a1a2e;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #ef4444;
+        }
+
+        .url {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            word-break: break-all;
+            margin: 20px 0;
+            font-family: monospace;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🚫 Site Blocked</h1>
+        <p>This site has been blocked by SentinelX Guardian</p>
+
+        <div class="url" id="blockedUrl">Loading...</div>
+        <div id="reasonText">Loading reason...</div>
+
+        <div style="margin-top: 30px;">
+            <button id="goBackBtn" class="btn btn-primary">← Go Back</button>
+            <button id="whitelistBtn" class="btn btn-secondary">✅ Trust Site</button>
+            <button id="proceedBtn" class="btn btn-danger">⚠️ Proceed Anyway</button>
+        </div>
+
+        <div id="status" style="margin-top:20px; font-size:12px;"></div>
+    </div>
+
+    <!-- MV3 CSP-compliant script (no inline JS) -->
+    <script src="blocked.js"></script>
+</body>
+
+</html>

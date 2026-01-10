@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SentinelX Guardian Pro</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body style="width: 420px; min-height: 550px;">
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">🛡️</div>
+                <div class="logo-text">
+                    <h1>SentinelX Pro</h1>
+                    <p>Guardian v3.0</p>
+                </div>
+            </div>
+            <button class=" btn btn-icon" id="settingsBtn" title="Settings">
+                <span>⚙️</span>
+            </button>
+        </header>
+
+        <!-- Quick Stats -->
+        <div class="quick-stats">
+            <div class="quick-stat">
+                <div class="quick-stat-value" id="quickBlocked">0</div>
+                <div class="quick-stat-label">Blocked</div>
+            </div>
+            <div class="quick-stat">
+                <div class="quick-stat-value" id="quickScanned">0</div>
+                <div class="quick-stat-label">Scanned</div>
+            </div>
+            <div class="quick-stat">
+                <div class="quick-stat-value" id="quickDetected">0</div>
+                <div class="quick-stat-label">Detected</div>
+            </div>
+        </div>
+
+        <!-- Current Site Analysis -->
+        <div class="threat-card" id="threatCard">
+            <div class="threat-header">
+                <div class="threat-icon" id="threatIcon">🛡️</div>
+                <div class="threat-info">
+                    <h2 id="threatLevel">Analyzing...</h2>
+                    <p id="threatDescription">Scanning current page</p>
+                </div>
+            </div>
+            <div class="threat-score">
+                <div class="score-label">Threat Score</div>
+                <div class="score-value" id="threatScore">--</div>
+            </div>
+        </div>
+
+        <!-- Current Site Actions -->
+        <div class="site-actions">
+            <button class="btn btn-sm btn-success" id="whitelistBtn" title="Trust this site">
+                <span>✅</span> Trust Site
+            </button>
+            <button class="btn btn-sm btn-danger" id="blockBtn" title="Block this site">
+                <span>🚫</span> Block Site
+            </button>
+        </div>
+
+        <!-- Threat Details -->
+        <div class="threats-section" id="threatsSection">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <h3>Detected Threats</h3>
+                <button class="btn btn-sm" id="rescanBtn">
+                    <span class="btn-icon">🔄</span> Rescan
+                </button>
+            </div>
+            <div class="threat-list" id="threatList">
+                <div class="no-threats">
+                    <div class="no-threats-icon">✨</div>
+                    <p>No threats detected</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="activity-section">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <h3 style="font-size: 14px; font-weight: 600; margin: 0;">Recent Activity</h3>
+                <button class="btn btn-sm" id="viewHistoryBtn" style="font-size: 11px; padding: 4px 8px;">
+                    View All
+                </button>
+            </div>
+            <div id="recentActivity">
+                <p style="font-size: 12px; color: var(--text-muted); text-align: center; padding: 8px;">
+                    No recent activity
+                </p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                <p>Protected by SentinelX AI</p>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn btn-icon btn-sm" id="reportBtn" title="Report Issue">
+                        <span>📝</span>
+                    </button>
+                    <button class="btn btn-icon btn-sm" id="helpBtn" title="Help">
+                        <span>❓</span>
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+
+</html>
