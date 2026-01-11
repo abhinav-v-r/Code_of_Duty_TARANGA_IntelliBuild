@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Your PayPal Account - Urgent Action Required</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .header {
+            background: linear-gradient(135deg, #003087, #009cde);
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }
+        .header img, .logo {
+            font-size: 28px;
+            color: white;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .container {
+            max-width: 500px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+        .content { padding: 30px; }
+        .alert {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .alert-icon { font-size: 40px; margin-bottom: 10px; }
+        .alert h2 { margin-bottom: 10px; font-size: 18px; }
+        .alert p { font-size: 14px; opacity: 0.9; }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #003087;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #003087, #009cde);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,48,135,0.4);
+        }
+        .timer {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #856404;
+            font-weight: 600;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            font-size: 12px;
+            color: #666;
+        }
+        .demo-notice {
+            background: #e8f4f8;
+            border: 2px dashed #17a2b8;
+            padding: 15px;
+            margin: 20px;
+            border-radius: 8px;
+            text-align: center;
+            color: #0c5460;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">PayPal</div>
+        </div>
+        <div class="content">
+            <div class="alert">
+                <div class="alert-icon">⚠️</div>
+                <h2>SECURITY ALERT: Account Suspended!</h2>
+                <p>Unusual activity detected. Verify your identity immediately to restore access.</p>
+            </div>
+            
+            <div class="timer">
+                ⏰ Time remaining to verify: <span id="countdown">23:59:47</span>
+            </div>
+            
+            <form id="phishForm">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter your password" required>
+                </div>
+                <div class="form-group">
+                    <label>Credit Card Number</label>
+                    <input type="text" placeholder="XXXX XXXX XXXX XXXX" required>
+                </div>
+                <div class="form-group">
+                    <label>CVV</label>
+                    <input type="text" placeholder="XXX" maxlength="4" required>
+                </div>
+                <button type="submit" class="submit-btn">🔐 Verify Account Now</button>
+            </form>
+        </div>
+        <div class="footer">
+            <p>© 2026 PayPal, Inc. All rights reserved.</p>
+        </div>
+    </div>
+    
+    <div class="demo-notice">
+        🛡️ <strong>DEMO PAGE</strong> - This is a simulated phishing page for testing SentinelX Guardian Pro extension.
+    </div>
+
+    <script>
+        // Countdown timer
+        let time = 86387;
+        setInterval(() => {
+            time--;
+            const h = Math.floor(time / 3600);
+            const m = Math.floor((time % 3600) / 60);
+            const s = time % 60;
+            document.getElementById('countdown').textContent = 
+                `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+        }, 1000);
+
+        document.getElementById('phishForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('⚠️ This is a DEMO phishing page!\n\nNever enter personal information on suspicious websites.\n\nIf SentinelX Guardian Pro was active, this page would have been blocked!');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp - Verify Your Number to Continue</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #075e54, #128c7e);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .header-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .alert-bar {
+            background: #dc3545;
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .reason-box {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .reason-box h3 {
+            color: #dc3545;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .reason-box ul {
+            padding-left: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .reason-box li {
+            margin-bottom: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #075e54;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #25d366;
+        }
+
+        .phone-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .phone-input .country {
+            width: 80px;
+            text-align: center;
+        }
+
+        .phone-input .number {
+            flex: 1;
+        }
+
+        .otp-info {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .otp-info p {
+            color: #2e7d32;
+            font-size: 14px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.02);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .demo-notice {
+            background: #fff3cd;
+            border: 2px dashed #ffc107;
+            padding: 15px;
+            margin: 20px;
+            border-radius: 8px;
+            text-align: center;
+            color: #856404;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-icon">📱</div>
+            <h1>WhatsApp</h1>
+            <p>Account Verification Required</p>
+        </div>
+        <div class="alert-bar">
+            ⚠️ Your WhatsApp will be deactivated in 2 hours!
+        </div>
+        <div class="content">
+            <div class="reason-box">
+                <h3>🚨 Why verification is needed:</h3>
+                <ul>
+                    <li>Unusual activity detected on your account</li>
+                    <li>Policy violation reported</li>
+                    <li>Annual verification requirement</li>
+                </ul>
+            </div>
+
+            <form id="whatsappForm">
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <div class="phone-input">
+                        <input type="text" class="country" value="+91" readonly>
+                        <input type="tel" class="number" placeholder="Enter your number" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>WhatsApp Backup Code</label>
+                    <input type="text" placeholder="Enter 6-digit backup code" maxlength="6" required>
+                </div>
+
+                <div class="otp-info">
+                    <p>📨 We'll send a verification code to your number</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Verification OTP</label>
+                    <input type="text" placeholder="Enter OTP received" maxlength="6" required>
+                </div>
+
+                <button type="submit" class="submit-btn">✓ Verify My Account</button>
+            </form>
+        </div>
+        <div class="footer">
+            <p>© 2026 WhatsApp LLC</p>
+            <p>End-to-end encrypted service</p>
+        </div>
+    </div>
+
+    <div class="demo-notice">
+        🛡️ <strong>DEMO SCAM PAGE</strong> - WhatsApp never asks for verification via websites! SentinelX blocks this.
+    </div>
+
+    <script>
+        document.getElementById('whatsappForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('⚠️ This is a DEMO phishing page!\n\nWhatsApp will NEVER:\n- Ask you to verify via a website\n- Request backup codes externally\n- Threaten to deactivate your account\n\nThis is an OTP hijacking scam. SentinelX blocks these!');
+        });
+    </script>
+</body>
+
+</html>

@@ -19,7 +19,10 @@ import {
     Zap,
     Clock,
     Users,
-    Eye
+    Eye,
+    Target,
+    Crosshair,
+    ExternalLink
 } from 'lucide-react'
 import { motion } from 'framer-motion'
 
@@ -166,9 +169,8 @@ export function EducationalSection() {
                                                         <div className="flex items-center gap-4">
                                                             <motion.div
                                                                 whileHover={{ scale: 1.1, rotate: 5 }}
-                                                                className={`w-14 h-14 rounded-xl bg-gradient-to-br ${
-                                                                    scam.risk === 'high' ? 'from-red-500 to-orange-500' : 'from-yellow-500 to-orange-500'
-                                                                } flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow`}
+                                                                className={`w-14 h-14 rounded-xl bg-gradient-to-br ${scam.risk === 'high' ? 'from-red-500 to-orange-500' : 'from-yellow-500 to-orange-500'
+                                                                    } flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow`}
                                                             >
                                                                 <Icon className="w-7 h-7 text-white" />
                                                             </motion.div>
@@ -291,58 +293,121 @@ export function EducationalSection() {
                                 </Card>
                             </motion.div>
 
-                            {/* Visual Learning */}
+
+                            {/* CyberGuard Simulation Lab */}
                             <motion.div
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: 0.4 }}
+                                transition={{ delay: 0.6 }}
                             >
-                                <Card className="bg-gradient-to-br from-blue-50/80 via-purple-50/80 to-pink-50/80 dark:from-blue-950/30 dark:via-purple-950/30 dark:to-pink-950/30 border-2 border-purple-200/50 dark:border-purple-800/50 backdrop-blur-sm shadow-xl">
-                                    <CardHeader>
-                                        <CardTitle className="text-xl font-elegant font-bold flex items-center gap-3">
-                                            <Eye className="w-6 h-6 text-purple-600" />
-                                            Visual Pattern Recognition
-                                        </CardTitle>
-                                        <CardDescription className="text-base font-body">
-                                            See real examples of scams and learn to spot them
-                                        </CardDescription>
+                                <Card className="relative overflow-hidden bg-gradient-to-br from-cyan-50/90 via-teal-50/90 to-emerald-50/90 dark:from-cyan-950/40 dark:via-teal-950/40 dark:to-emerald-950/40 border-2 border-cyan-300/60 dark:border-cyan-700/60 backdrop-blur-sm shadow-2xl">
+                                    {/* Animated Background Elements */}
+                                    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                                        <motion.div
+                                            animate={{
+                                                rotate: [0, 360],
+                                                scale: [1, 1.2, 1]
+                                            }}
+                                            transition={{
+                                                duration: 20,
+                                                repeat: Infinity,
+                                                ease: "linear"
+                                            }}
+                                            className="absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-br from-cyan-400/20 to-teal-400/20 rounded-full blur-2xl"
+                                        />
+                                        <motion.div
+                                            animate={{
+                                                rotate: [360, 0],
+                                                scale: [1.2, 1, 1.2]
+                                            }}
+                                            transition={{
+                                                duration: 25,
+                                                repeat: Infinity,
+                                                ease: "linear",
+                                                delay: 0.5
+                                            }}
+                                            className="absolute -bottom-10 -left-10 w-32 h-32 bg-gradient-to-br from-teal-400/20 to-emerald-400/20 rounded-full blur-2xl"
+                                        />
+                                        {/* Cyber Grid Pattern */}
+                                        <div className="absolute inset-0 opacity-5 dark:opacity-10" style={{
+                                            backgroundImage: 'linear-gradient(to right, cyan 1px, transparent 1px), linear-gradient(to bottom, cyan 1px, transparent 1px)',
+                                            backgroundSize: '20px 20px'
+                                        }} />
+                                    </div>
+
+                                    <CardHeader className="relative z-10">
+                                        <div className="flex items-center gap-4">
+                                            <motion.div
+                                                animate={{
+                                                    boxShadow: [
+                                                        '0 0 20px rgba(6, 182, 212, 0.3)',
+                                                        '0 0 40px rgba(6, 182, 212, 0.5)',
+                                                        '0 0 20px rgba(6, 182, 212, 0.3)'
+                                                    ]
+                                                }}
+                                                transition={{ duration: 2, repeat: Infinity }}
+                                                className="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500 via-teal-500 to-emerald-500 flex items-center justify-center shadow-lg"
+                                            >
+                                                <Target className="w-7 h-7 text-white" />
+                                            </motion.div>
+                                            <div>
+                                                <CardTitle className="text-xl font-elegant font-bold flex items-center gap-2 bg-gradient-to-r from-cyan-700 via-teal-700 to-emerald-700 dark:from-cyan-300 dark:via-teal-300 dark:to-emerald-300 bg-clip-text text-transparent">
+                                                    CyberGuard Simulation Lab
+                                                    <Badge className="bg-gradient-to-r from-cyan-500 to-teal-500 text-white text-xs ml-2 shadow-md animate-pulse">
+                                                        NEW
+                                                    </Badge>
+                                                </CardTitle>
+                                                <CardDescription className="text-base font-body text-gray-700 dark:text-gray-300">
+                                                    Experience real scam scenarios in a safe, hands-on environment
+                                                </CardDescription>
+                                            </div>
+                                        </div>
                                     </CardHeader>
-                                    <CardContent>
-                                        <div className="grid grid-cols-2 gap-4 mb-6">
-                                            <motion.div
-                                                whileHover={{ scale: 1.05, y: -5 }}
-                                                className="bg-white dark:bg-gray-800 rounded-xl p-6 border-2 border-green-500/50 shadow-lg text-center"
-                                            >
+                                    <CardContent className="relative z-10">
+                                        <div className="space-y-4 mb-6">
+                                            {[
+                                                { icon: Mail, text: 'Phishing Email Lab - Navigate realistic inbox threats' },
+                                                { icon: Link2, text: 'Fake Website Lab - Spot fraudulent e-commerce sites' },
+                                                { icon: CreditCard, text: 'UPI/QR Scam Lab - Avoid payment fraud traps' }
+                                            ].map((item, i) => (
                                                 <motion.div
-                                                    animate={{ scale: [1, 1.1, 1] }}
-                                                    transition={{ duration: 2, repeat: Infinity }}
-                                                    className="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center shadow-xl"
+                                                    key={i}
+                                                    initial={{ opacity: 0, x: -20 }}
+                                                    whileInView={{ opacity: 1, x: 0 }}
+                                                    viewport={{ once: true }}
+                                                    transition={{ delay: 0.7 + i * 0.1 }}
+                                                    className="flex items-center gap-3 p-3 rounded-lg bg-white/50 dark:bg-gray-800/50 border border-cyan-200/50 dark:border-cyan-700/50"
                                                 >
-                                                    <CheckCircle2 className="w-8 h-8 text-white" />
+                                                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-400 to-teal-400 flex items-center justify-center shadow-md">
+                                                        <item.icon className="w-4 h-4 text-white" />
+                                                    </div>
+                                                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{item.text}</span>
                                                 </motion.div>
-                                                <p className="text-sm font-bold text-green-700 dark:text-green-400 font-elegant">Safe Example</p>
-                                            </motion.div>
-                                            <motion.div
-                                                whileHover={{ scale: 1.05, y: -5 }}
-                                                className="bg-white dark:bg-gray-800 rounded-xl p-6 border-2 border-red-500/50 shadow-lg text-center"
-                                            >
-                                                <motion.div
-                                                    animate={{ scale: [1, 1.1, 1] }}
-                                                    transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-                                                    className="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-red-400 to-pink-500 flex items-center justify-center shadow-xl"
-                                                >
-                                                    <AlertTriangle className="w-8 h-8 text-white" />
-                                                </motion.div>
-                                                <p className="text-sm font-bold text-red-700 dark:text-red-400 font-elegant">Scam Example</p>
-                                            </motion.div>
+                                            ))}
+                                        </div>
+                                        <div className="flex items-center justify-between p-3 mb-4 rounded-lg bg-cyan-100/50 dark:bg-cyan-900/30 border border-cyan-300/50 dark:border-cyan-700/50">
+                                            <div className="flex items-center gap-2">
+                                                <Crosshair className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
+                                                <span className="text-sm font-medium text-cyan-700 dark:text-cyan-300">TryHackMe-style learning</span>
+                                            </div>
+                                            <Badge variant="outline" className="border-cyan-400 text-cyan-700 dark:text-cyan-300 text-xs">
+                                                No real risk
+                                            </Badge>
                                         </div>
                                         <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                                            <Button className="w-full h-12 text-base font-bold bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-xl" variant="gradient">
-                                                <PlayCircle className="w-5 h-5 mr-2" />
-                                                Start Interactive Tutorial
-                                                <Sparkles className="w-4 h-4 ml-2" />
-                                            </Button>
+                                            <a
+                                                href="http://localhost:5174"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="block"
+                                            >
+                                                <Button className="w-full h-14 text-base font-bold bg-gradient-to-r from-cyan-600 via-teal-600 to-emerald-600 hover:from-cyan-700 hover:via-teal-700 hover:to-emerald-700 text-white shadow-xl group" variant="gradient">
+                                                    <Target className="w-5 h-5 mr-2 group-hover:animate-pulse" />
+                                                    Launch Simulation Lab
+                                                    <ExternalLink className="w-4 h-4 ml-2 opacity-70 group-hover:opacity-100 transition-opacity" />
+                                                </Button>
+                                            </a>
                                         </motion.div>
                                     </CardContent>
                                 </Card>
@@ -365,7 +430,7 @@ export function EducationalSection() {
                             </p>
                         </div>
                         <p className="text-sm text-muted-foreground font-body max-w-2xl mx-auto leading-relaxed">
-                            Educational content adapted for regional fraud patterns and local payment systems. 
+                            Educational content adapted for regional fraud patterns and local payment systems.
                             Learn to protect yourself in your native language with culturally relevant examples.
                         </p>
                     </motion.div>

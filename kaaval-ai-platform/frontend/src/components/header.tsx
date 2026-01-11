@@ -16,7 +16,8 @@ import {
     HelpCircle,
     Sparkles,
     Download,
-    Chrome
+    Chrome,
+    Target
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -37,12 +38,15 @@ export function Header() {
         { label: 'Features', href: '#features', icon: Sparkles },
         { label: 'Analyzer', href: '#scam-analyzer', icon: Search },
         { label: 'Learn', href: '#education', icon: BookOpen },
+        { label: 'Sim Lab', href: 'http://localhost:5174', icon: Target, external: true },
         { label: 'Stats', href: '#impact', icon: BarChart3 },
         { label: 'Help', href: '#education', icon: HelpCircle },
     ]
 
-    const scrollToSection = (href: string) => {
-        if (href === '/' || href === '#') {
+    const scrollToSection = (href: string, external?: boolean) => {
+        if (external) {
+            window.open(href, '_blank', 'noopener,noreferrer')
+        } else if (href === '/' || href === '#') {
             window.scrollTo({ top: 0, behavior: 'smooth' })
         } else if (href.startsWith('#')) {
             const element = document.querySelector(href)
@@ -59,8 +63,8 @@ export function Header() {
             animate={{ y: 0 }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                    ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg shadow-lg border-b border-primary/10'
-                    : 'bg-transparent'
+                ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg shadow-lg border-b border-primary/10'
+                : 'bg-transparent'
                 }`}
         >
             <nav className="container mx-auto px-4 py-4">
@@ -106,8 +110,8 @@ export function Header() {
                                 >
                                     <Button
                                         variant="ghost"
-                                        onClick={() => scrollToSection(link.href)}
-                                        className="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors relative group"
+                                        onClick={() => scrollToSection(link.href, (link as any).external)}
+                                        className={`flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors relative group ${(link as any).external ? 'text-cyan-600 dark:text-cyan-400' : ''}`}
                                     >
                                         <Icon className="w-4 h-4" />
                                         <span>{link.label}</span>
@@ -127,7 +131,7 @@ export function Header() {
                             </Button>
                         </motion.div>
                         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                            <a href="/downloads/sentinelx-guardian-pro.zip" download>
+                            <Link href="/demo">
                                 <Button
                                     variant="outline"
                                     className="border-2 border-green-500 text-green-600 hover:bg-green-50 dark:hover:bg-green-950/30 font-semibold"
@@ -135,7 +139,7 @@ export function Header() {
                                     <Chrome className="w-4 h-4 mr-2" />
                                     Get Extension
                                 </Button>
-                            </a>
+                            </Link>
                         </motion.div>
                         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                             <Button
@@ -186,8 +190,8 @@ export function Header() {
                                     >
                                         <Button
                                             variant="ghost"
-                                            onClick={() => scrollToSection(link.href)}
-                                            className="w-full justify-start gap-3 text-base"
+                                            onClick={() => scrollToSection(link.href, (link as any).external)}
+                                            className={`w-full justify-start gap-3 text-base ${(link as any).external ? 'text-cyan-600 dark:text-cyan-400' : ''}`}
                                         >
                                             <Icon className="w-5 h-5" />
                                             {link.label}
@@ -196,15 +200,15 @@ export function Header() {
                                 )
                             })}
                             <div className="pt-4 border-t border-border space-y-2">
-                                <a href="/downloads/sentinelx-guardian-pro.zip" download className="block">
+                                <Link href="/demo" className="block">
                                     <Button
                                         variant="outline"
                                         className="w-full border-2 border-green-500 text-green-600 hover:bg-green-50"
                                     >
                                         <Chrome className="w-4 h-4 mr-2" />
-                                        Download Extension
+                                        Get Extension
                                     </Button>
-                                </a>
+                                </Link>
                                 <Button
                                     variant="gradient"
                                     className="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600"

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon - Claim Your ₹5000 Gift Card!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Amazon Ember', Arial, sans-serif;
+            background: #232f3e;
+            min-height: 100vh;
+        }
+
+        .amazon-header {
+            background: #131921;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo {
+            color: #ff9900;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .prize-banner {
+            background: linear-gradient(135deg, #ff9900, #ffcc00);
+            padding: 30px;
+            text-align: center;
+            color: #131921;
+        }
+
+        .prize-banner h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .prize-banner p {
+            font-size: 18px;
+        }
+
+        .confetti {
+            font-size: 40px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: -30px auto 30px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 10;
+        }
+
+        .winner-box {
+            background: linear-gradient(135deg, #00c853, #00e676);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .winner-box h2 {
+            margin-bottom: 5px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .gift-card {
+            background: linear-gradient(135deg, #ff9900, #ffcc00);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(255, 153, 0, 0.4);
+        }
+
+        .gift-card h3 {
+            color: #131921;
+            font-size: 36px;
+            margin-bottom: 5px;
+        }
+
+        .gift-card p {
+            color: #232f3e;
+        }
+
+        .urgency {
+            background: #fee2e2;
+            border: 1px solid #fca5a5;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #991b1b;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #232f3e;
+            margin-bottom: 6px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #ff9900;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #ff9900, #ffcc00);
+            color: #131921;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.02);
+        }
+
+        .steps {
+            background: #f0f9ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .steps h4 {
+            color: #0369a1;
+            margin-bottom: 10px;
+        }
+
+        .steps ol {
+            padding-left: 20px;
+            color: #0c4a6e;
+            font-size: 14px;
+        }
+
+        .steps li {
+            margin-bottom: 5px;
+        }
+
+        .demo-notice {
+            background: #fef3c7;
+            border: 2px dashed #f59e0b;
+            padding: 15px;
+            margin: 20px;
+            border-radius: 8px;
+            text-align: center;
+            color: #92400e;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="amazon-header">
+        <div class="logo">amazon</div>
+    </div>
+
+    <div class="prize-banner">
+        <div class="confetti">🎉🎊🎁</div>
+        <h1>CONGRATULATIONS!</h1>
+        <p>You've been selected as today's lucky winner!</p>
+    </div>
+
+    <div class="container">
+        <div class="winner-box">
+            <h2>🏆 YOU WON!</h2>
+            <p>Exclusive Amazon Gift Card</p>
+        </div>
+        <div class="content">
+            <div class="gift-card">
+                <h3>₹5,000</h3>
+                <p>Amazon Gift Card Value</p>
+            </div>
+
+            <div class="urgency">
+                ⏰ Offer expires in: <strong id="timer">14:59</strong> minutes!
+                <br><small>Only 3 gift cards remaining today!</small>
+            </div>
+
+            <div class="steps">
+                <h4>📋 How to Claim:</h4>
+                <ol>
+                    <li>Verify your Amazon account details</li>
+                    <li>Enter payment info for shipping charges (₹49 only!)</li>
+                    <li>Receive your ₹5,000 gift card instantly!</li>
+                </ol>
+            </div>
+
+            <form id="claimForm">
+                <div class="form-group">
+                    <label>Amazon Account Email</label>
+                    <input type="email" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Amazon Password</label>
+                    <input type="password" placeholder="Enter password to verify" required>
+                </div>
+                <div class="form-group">
+                    <label>Credit/Debit Card (for ₹49 shipping)</label>
+                    <input type="text" placeholder="XXXX XXXX XXXX XXXX" required>
+                </div>
+                <div class="form-group">
+                    <label>Card Expiry & CVV</label>
+                    <input type="text" placeholder="MM/YY CVV" required>
+                </div>
+                <button type="submit" class="submit-btn">🎁 CLAIM MY ₹5,000 NOW!</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="demo-notice">
+        🛡️ <strong>DEMO SCAM PAGE</strong> - This simulates a fake prize/lottery scam. SentinelX would block this!
+    </div>
+
+    <script>
+        // Countdown timer
+        let mins = 14, secs = 59;
+        setInterval(() => {
+            secs--;
+            if (secs < 0) { mins--; secs = 59; }
+            if (mins < 0) { mins = 14; secs = 59; }
+            document.getElementById('timer').textContent =
+                `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }, 1000);
+
+        document.getElementById('claimForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('⚠️ This is a DEMO prize scam!\n\nRed flags:\n- "You won" without entering\n- Urgency tactics\n- Asking for payment details\n- Too good to be true\n\nSentinelX would block this page!');
+        });
+    </script>
+</body>
+
+</html>

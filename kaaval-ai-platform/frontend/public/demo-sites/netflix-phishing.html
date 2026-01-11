@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix - Your Account Will Be Suspended</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: #141414;
+            min-height: 100vh;
+            color: white;
+        }
+
+        .header {
+            background: #141414;
+            padding: 20px 40px;
+            border-bottom: 1px solid #333;
+        }
+
+        .logo {
+            color: #e50914;
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            max-width: 450px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .alert-card {
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            border-radius: 12px;
+            padding: 40px;
+            border: 1px solid #404040;
+        }
+
+        .alert-icon {
+            text-align: center;
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #e50914;
+        }
+
+        .message {
+            text-align: center;
+            color: #b3b3b3;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .warning-box {
+            background: rgba(229, 9, 20, 0.1);
+            border: 1px solid #e50914;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .warning-box p {
+            color: #e50914;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: #b3b3b3;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 16px;
+            background: #333;
+            border: 1px solid #454545;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #e50914;
+        }
+
+        input::placeholder {
+            color: #8c8c8c;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: #e50914;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #f40612;
+        }
+
+        .help-links {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .help-links a {
+            color: #737373;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px;
+            color: #737373;
+            font-size: 12px;
+        }
+
+        .demo-notice {
+            background: #1a1a2e;
+            border: 2px dashed #5c5cff;
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 500px;
+            border-radius: 8px;
+            text-align: center;
+            color: #8888ff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo">NETFLIX</div>
+    </div>
+
+    <div class="container">
+        <div class="alert-card">
+            <div class="alert-icon">🔒</div>
+            <h1>Account On Hold</h1>
+            <p class="message">
+                We were unable to validate your billing information for the next billing cycle of your subscription.
+            </p>
+
+            <div class="warning-box">
+                <p>⚠️ Your membership will be cancelled within 24 hours</p>
+            </div>
+
+            <form id="netflixForm">
+                <div class="form-group">
+                    <label>Email or phone number</label>
+                    <input type="text" placeholder="Enter your email or phone" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter your password" required>
+                </div>
+                <div class="form-group">
+                    <label>Credit or Debit Card Number</label>
+                    <input type="text" placeholder="Card number" required>
+                </div>
+                <div class="form-group">
+                    <label>Expiration Date</label>
+                    <input type="text" placeholder="MM/YY" required>
+                </div>
+                <div class="form-group">
+                    <label>CVV</label>
+                    <input type="text" placeholder="3 digits on back of card" maxlength="4" required>
+                </div>
+                <button type="submit" class="submit-btn">Update Payment Method</button>
+            </form>
+
+            <div class="help-links">
+                <a href="#">Questions? Contact us.</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo-notice">
+        🛡️ <strong>DEMO PHISHING PAGE</strong> - This simulates a Netflix billing scam. SentinelX blocks these threats!
+    </div>
+
+    <div class="footer">
+        <p>© 2026 Netflix, Inc.</p>
+    </div>
+
+    <script>
+        document.getElementById('netflixForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('⚠️ This is a DEMO phishing page!\n\nNetflix will NEVER:\n- Email links asking for card details\n- Threaten immediate cancellation\n- Ask for CVV via email/web\n\nSentinelX would block this site!');
+        });
+    </script>
+</body>
+
+</html>

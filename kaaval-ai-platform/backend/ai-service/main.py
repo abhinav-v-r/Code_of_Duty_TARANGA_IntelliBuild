@@ -175,8 +175,8 @@ async def analyze_content(request: ScamAnalysisRequest):
     try:
         logger.info(f"Analyzing content of type: {request.type}")
         
-        # Perform analysis
-        analysis_result = scam_detector.analyze_text(
+        # Perform async analysis with Gemini AI
+        analysis_result = await scam_detector._analyze_text_async(
             content=request.content,
             content_type=request.type
         )
@@ -191,7 +191,7 @@ async def analyze_content(request: ScamAnalysisRequest):
             "timestamp": datetime.now().isoformat()
         }
         
-        logger.info(f"Analysis completed: {analysis_id} - Risk: {analysis_result['risk_level']}")
+        logger.info(f"Analysis completed: {analysis_id} - Risk: {analysis_result['riskLevel']} - AI: {analysis_result.get('aiPowered', False)}")
         
         return APIResponse(
             success=True,
@@ -217,8 +217,8 @@ async def analyze_url(request: URLAnalysisRequest):
     try:
         logger.info(f"Analyzing URL: {request.url}")
         
-        # Perform URL analysis
-        analysis_result = scam_detector.analyze_url_content(request.url)
+        # Perform async URL analysis with Gemini AI
+        analysis_result = await scam_detector._analyze_url_async(request.url)
         
         # Generate unique ID
         analysis_id = f"url-analysis-{datetime.now().timestamp()}"
@@ -230,7 +230,7 @@ async def analyze_url(request: URLAnalysisRequest):
             "timestamp": datetime.now().isoformat()
         }
         
-        logger.info(f"URL analysis completed: {analysis_id} - Risk: {analysis_result['risk_level']}")
+        logger.info(f"URL analysis completed: {analysis_id} - Risk: {analysis_result['riskLevel']} - AI: {analysis_result.get('aiPowered', False)}")
         
         return APIResponse(
             success=True,
