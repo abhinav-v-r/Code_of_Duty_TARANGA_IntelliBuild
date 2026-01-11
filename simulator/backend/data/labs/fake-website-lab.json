@@ -1,0 +1,194 @@
+{
+  "id": "fake-website-lab",
+  "name": "Fake Shopping Website Lab",
+  "type": "fake-website-lab",
+  "difficulty": "beginner",
+  "summary": "Browse a too-good-to-be-true shopping website with massive discounts. Will you spot the signs of a scam before entering your card details?",
+  "environment": {
+    "site": {
+      "domain": "https://superdeal-mart.in",
+      "padlock": true,
+      "pages": {
+        "home": {
+          "id": "home",
+          "heroText": "90% OFF on branded mobiles – TODAY ONLY!",
+          "timerText": "Offer ends in 05:00 minutes",
+          "products": [
+            {
+              "id": "phone-1",
+              "name": "Brand X Pro Max 5G 256GB",
+              "price": 1999,
+              "mrp": 79999,
+              "badge": "90% OFF",
+              "image": "phone-1.jpg"
+            }
+          ]
+        },
+        "product": {
+          "id": "product-phone-1",
+          "productId": "phone-1",
+          "description": "Experience the ultimate flagship smartphone at an unbelievable price. Limited stock available!",
+          "highlights": [
+            "All reviews are 5-star with generic comments",
+            "No clear return or warranty policy mentioned",
+            "No company address or contact details visible",
+            "Domain was registered 3 days ago"
+          ],
+          "reviews": [
+            {
+              "id": "rev-1",
+              "author": "Ravi K.",
+              "text": "Very nice product best best best highly recommend to everyone must buy",
+              "stars": 5
+            },
+            {
+              "id": "rev-2",
+              "author": "Anita S.",
+              "text": "Super phone got delivery in 1 day amazing quality thank you seller",
+              "stars": 5
+            },
+            {
+              "id": "rev-3",
+              "author": "Vikram M.",
+              "text": "Best deal ever 5 star product best best best will buy again",
+              "stars": 5
+            },
+            {
+              "id": "rev-4",
+              "author": "Priya R.",
+              "text": "Wow amazing phone working perfectly super fast shipping recommended",
+              "stars": 5
+            }
+          ]
+        },
+        "checkout": {
+          "id": "checkout",
+          "fields": [
+            {
+              "id": "full-name",
+              "label": "Full Name",
+              "type": "text"
+            },
+            {
+              "id": "address",
+              "label": "Delivery Address",
+              "type": "textarea"
+            },
+            {
+              "id": "card-number",
+              "label": "Card Number",
+              "type": "text"
+            },
+            {
+              "id": "expiry",
+              "label": "Expiry Date (MM/YY)",
+              "type": "text"
+            },
+            {
+              "id": "cvv",
+              "label": "CVV",
+              "type": "password"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "traps": [
+    {
+      "id": "rushed-to-buy",
+      "category": "urgency-greed",
+      "description": "You clicked 'Buy Now' on an unrealistic 90% discount without verifying the seller.",
+      "severity": 25,
+      "triggerEvents": [
+        {
+          "type": "click-buy-now",
+          "productId": "phone-1"
+        }
+      ]
+    },
+    {
+      "id": "added-to-cart",
+      "category": "engagement",
+      "description": "You added items to cart on an unverified website.",
+      "severity": 15,
+      "triggerEvents": [
+        {
+          "type": "add-to-cart",
+          "productId": "phone-1"
+        }
+      ]
+    },
+    {
+      "id": "started-checkout",
+      "category": "engagement",
+      "description": "You proceeded to checkout on a suspicious website.",
+      "severity": 20,
+      "triggerEvents": [
+        {
+          "type": "start-checkout"
+        }
+      ]
+    },
+    {
+      "id": "submitted-card-details",
+      "category": "payment-theft",
+      "description": "You entered your full card details including CVV on an untrusted website.",
+      "severity": 45,
+      "triggerEvents": [
+        {
+          "type": "submit-card",
+          "pageId": "checkout"
+        }
+      ]
+    },
+    {
+      "id": "ignored-url-bar",
+      "category": "fake-https",
+      "description": "You submitted payment without inspecting the website's URL or certificate.",
+      "severity": 15,
+      "triggerEvents": [
+        {
+          "type": "derived",
+          "rule": "no-inspect-url-before-submit-card"
+        }
+      ]
+    },
+    {
+      "id": "inspected-url",
+      "category": "good-action",
+      "description": "You inspected the URL and certificate details before proceeding.",
+      "severity": -15,
+      "triggerEvents": [
+        {
+          "type": "inspect-url"
+        }
+      ]
+    }
+  ],
+  "debrief": {
+    "realWorldConsequences": [
+      "Scammers could charge your card multiple times or sell your card details to criminals.",
+      "You may never receive any product, or receive a cheap counterfeit instead.",
+      "Your card details could be used for unauthorized purchases across multiple merchants.",
+      "You have no recourse – fake websites disappear within days, making chargebacks difficult.",
+      "Your address and personal details could be sold to other scammers for future attacks."
+    ],
+    "preventionTips": [
+      "If a discount seems too good to be true (70-90% off branded items), it almost certainly is.",
+      "Check for a clear 'About Us' page, physical address, GST number, and customer service contact.",
+      "Search for the website name + 'scam' or 'review' before buying from unknown sites.",
+      "Use trusted payment gateways like Razorpay, PayU, or PayTM that offer buyer protection.",
+      "A padlock (HTTPS) only means the connection is encrypted – it doesn't mean the site is legitimate.",
+      "Read reviews carefully – fake reviews often use repetitive phrases and perfect 5-star ratings."
+    ],
+    "redFlagHints": {
+      "rushed-to-buy": "The huge discount (90% off a ₹79,999 phone for ₹1,999) and countdown timer are designed to make you act without thinking.",
+      "added-to-cart": "Adding to cart on unverified sites commits you psychologically to completing the purchase.",
+      "started-checkout": "Legitimate e-commerce sites have well-known payment processors – be suspicious of direct card entry forms.",
+      "submitted-card-details": "Never enter CVV on unfamiliar sites. Legitimate merchants use secure payment gateways.",
+      "ignored-url-bar": "Always check the domain name. 'superdeal-mart.in' is not a known retailer. Also check when the domain was registered.",
+      "inspected-url": "You correctly checked the URL details – this is a crucial security habit."
+    }
+  }
+}

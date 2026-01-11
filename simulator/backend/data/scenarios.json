@@ -1,0 +1,385 @@
+[
+  {
+    "id": "phishing-email-bank-kyc",
+    "title": "Bank KYC Phishing Email",
+    "scamType": "Phishing Email",
+    "description": "A fake bank email claiming your KYC is expiring and asking you to urgently verify your account.",
+    "psychologyTriggers": ["urgency", "authority", "fear"],
+    "steps": [
+      {
+        "id": 1,
+        "title": "Urgent KYC update email",
+        "type": "email",
+        "message": {
+          "fromName": "Support - State Bank of Bharat",
+          "fromAddress": "support@sbbank-secure.com",
+          "to": "you@example.com",
+          "subject": "URGENT: Your KYC will be blocked in 24 hours",
+          "body": "Dear Customer,\n\nAs per RBI guidelines your KYC is expiring today. If you do not update within 24 hours, your account will be blocked and all transactions stopped. Please click the link below to continue using your account.\n\nVerify Now: https://sbbank-secure.com/verify\n\nThank you,\nState Bank of Bharat"
+        },
+        "options": [
+          {
+            "id": "click-link",
+            "label": "Click on the \"Verify Now\" link",
+            "riskImpact": 40,
+            "riskLevel": "Dangerous",
+            "isCorrect": false,
+            "explanation": "Clicking immediately on urgent emails without checking sender or URL is very risky. Scam links often lead to fake login pages that steal your ID and password.",
+            "redFlagKeys": ["urgent-language", "unknown-domain", "link-click"]
+          },
+          {
+            "id": "check-sender",
+            "label": "Check the sender email address and URL carefully",
+            "riskImpact": 0,
+            "riskLevel": "Safe",
+            "isCorrect": true,
+            "explanation": "Checking the full sender address and hovering over links helps you spot fake domains like sbbank-secure.com instead of the official bank website.",
+            "redFlagKeys": ["unknown-domain"]
+          },
+          {
+            "id": "ignore",
+            "label": "Ignore and delete the email",
+            "riskImpact": 5,
+            "riskLevel": "Risky",
+            "isCorrect": false,
+            "explanation": "Deleting is safer than clicking, but better action is to verify using official bank channels. You might miss an important real alert if you always delete without checking.",
+            "redFlagKeys": []
+          },
+          {
+            "id": "report-spam",
+            "label": "Report as spam / phishing in your email app",
+            "riskImpact": 0,
+            "riskLevel": "Safe",
+            "isCorrect": true,
+            "explanation": "Reporting helps your email provider block similar scams for you and others.",
+            "redFlagKeys": ["reporting"]
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Fake bank login page",
+        "type": "website",
+        "message": {
+          "url": "https://sbbank-secure.com/verify",
+          "padlock": true,
+          "content": "A login page that looks almost like your bank, asking for User ID, password, and full ATM PIN."
+        },
+        "options": [
+          {
+            "id": "enter-details",
+            "label": "Enter User ID, password and ATM PIN",
+            "riskImpact": 50,
+            "riskLevel": "Dangerous",
+            "isCorrect": false,
+            "explanation": "No genuine bank ever asks for full ATM PIN on a webpage. Entering these details gives scammers full access to your account.",
+            "redFlagKeys": ["asks-for-pin", "fake-https"]
+          },
+          {
+            "id": "inspect-url",
+            "label": "Check the URL spelling and security certificate",
+            "riskImpact": 0,
+            "riskLevel": "Safe",
+            "isCorrect": true,
+            "explanation": "Carefully checking the URL (domain name) helps you see that this is not the official bank domain, even if there is a padlock.",
+            "redFlagKeys": ["fake-https", "lookalike-domain"]
+          },
+          {
+            "id": "close-page",
+            "label": "Close the page and call the bank using number on official website",
+            "riskImpact": 0,
+            "riskLevel": "Safe",
+            "isCorrect": true,
+            "explanation": "Using official numbers from your passbook, card or bank website is the safest way to confirm if any action is needed.",
+            "redFlagKeys": ["verify-officially"]
+          }
+        ]
+      }
+    ],
+    "preventionTips": [
+      "Never click on bank links sent by email or SMS. Type the official bank URL manually.",
+      "Check the full sender address, not just the display name.",
+      "Banks and RBI never ask for your full ATM PIN, OTP or password by email or phone.",
+      "If in doubt, call your bank using the number on the back of your card or official website."
+    ]
+  },
+  {
+    "id": "fake-shopping-website-discount",
+    "title": "Too-Good-To-Be-True Shopping Offer",
+    "scamType": "Fake Website",
+    "description": "A fake shopping website offers 90% discount on branded mobiles with fake reviews and logos.",
+    "psychologyTriggers": ["greed", "scarcity", "urgency"],
+    "steps": [
+      {
+        "id": 1,
+        "title": "Ad with 90% discount",
+        "type": "website",
+        "message": {
+          "url": "https://superdeal-mart.in",
+          "padlock": true,
+          "content": "A homepage showing expensive phones for Rs. 1,999 only, with a timer showing \"Offer ends in 05:00 minutes\"."
+        },
+        "options": [
+          {
+            "id": "buy-now",
+            "label": "Click \"Buy Now\" immediately before offer ends",
+            "riskImpact": 35,
+            "riskLevel": "Dangerous",
+            "isCorrect": false,
+            "explanation": "Scammers use timers and huge discounts to make you act without thinking. Rushing to pay on unknown sites is very risky.",
+            "redFlagKeys": ["huge-discount", "timer-pressure"]
+          },
+          {
+            "id": "inspect-url",
+            "label": "Check website URL, about us, and contact details",
+            "riskImpact": 0,
+            "riskLevel": "Safe",
+            "isCorrect": true,
+            "explanation": "Legit sites usually have clear company details, returns policy, and proper domain names.",
+            "redFlagKeys": ["no-company-info"]
+          },
+          {
+            "id": "read-reviews",
+            "label": "Search for independent reviews on Google/YouTube",
+            "riskImpact": 0,
+            "riskLevel": "Safe",
+            "isCorrect": true,
+            "explanation": "Searching outside the site often reveals complaints that are hidden from the fake reviews on the website.",
+            "redFlagKeys": ["fake-reviews"]
+          },
+          {
+            "id": "exit-site",
+            "label": "Exit the site and ignore the offer",
+            "riskImpact": 0,
+            "riskLevel": "Safe",
+            "isCorrect": true,
+            "explanation": "If an offer looks too good to be true, it usually is. Better to skip than lose money.",
+            "redFlagKeys": []
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Payment page",
+        "type": "website",
+        "message": {
+          "url": "https://superdeal-mart.in/checkout",
+          "padlock": true,
+          "content": "Checkout page asking for full card number, CVV, expiry and OTP on the same screen."
+        },
+        "options": [
+          {
+            "id": "enter-card",
+            "label": "Enter card details and approve OTP",
+            "riskImpact": 45,
+            "riskLevel": "Dangerous",
+            "isCorrect": false,
+            "explanation": "Once scammers have your card details and OTP, they can charge your card multiple times.",
+            "redFlagKeys": ["asks-otp", "untrusted-site"]
+          },
+          {
+            "id": "cod-only",
+            "label": "Look for Cash on Delivery or trusted payment options",
+            "riskImpact": 5,
+            "riskLevel": "Risky",
+            "isCorrect": false,
+            "explanation": "COD is safer than prepayment, but on fake sites even COD parcels may contain bricks or cheap items.",
+            "redFlagKeys": []
+          },
+          {
+            "id": "exit-before-paying",
+            "label": "Exit without entering any details",
+            "riskImpact": 0,
+            "riskLevel": "Safe",
+            "isCorrect": true,
+            "explanation": "Leaving the site keeps your card details safe. You can search for the same product on trusted platforms.",
+            "redFlagKeys": ["untrusted-site"]
+          }
+        ]
+      }
+    ],
+    "preventionTips": [
+      "Be very cautious of 70–90% discounts on expensive items.",
+      "Check for company details, customer care number, and physical address.",
+      "Search for independent reviews before paying on a new website.",
+      "Prefer trusted marketplaces and official brand websites."
+    ]
+  },
+  {
+    "id": "upi-qr-receive-money",
+    "title": "UPI / QR Code Receive Money Scam",
+    "scamType": "UPI / QR Code",
+    "description": "A scammer asks you to scan a QR code to receive money, but actually it will send money from your account.",
+    "psychologyTriggers": ["helping-nature", "urgency"],
+    "steps": [
+      {
+        "id": 1,
+        "title": "QR to receive refund",
+        "type": "upi",
+        "message": {
+          "from": "Online Seller (WhatsApp)",
+          "text": "Sir, by mistake we charged you twice. Please scan this QR code to instantly receive your refund of Rs. 4,999.",
+          "note": "QR code image shown with amount pre-filled."
+        },
+        "options": [
+          {
+            "id": "scan-qr",
+            "label": "Open UPI app and scan the QR code",
+            "riskImpact": 45,
+            "riskLevel": "Dangerous",
+            "isCorrect": false,
+            "explanation": "UPI QR codes are normally used to SEND money, not receive. Scanning will create a payment from you to the scammer.",
+            "redFlagKeys": ["qr-to-receive", "refund-scam"]
+          },
+          {
+            "id": "ask-upi-id",
+            "label": "Ask for UPI ID and check transaction history in your app",
+            "riskImpact": 0,
+            "riskLevel": "Safe",
+            "isCorrect": true,
+            "explanation": "Refunds normally go back automatically to your original payment method. Asking for UPI ID and checking your own app keeps you in control.",
+            "redFlagKeys": ["verify-in-app"]
+          },
+          {
+            "id": "decline-request",
+            "label": "Decline and say you will wait for automatic refund",
+            "riskImpact": 0,
+            "riskLevel": "Safe",
+            "isCorrect": true,
+            "explanation": "Genuine companies do not force you to scan QR codes to get refunds.",
+            "redFlagKeys": []
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "UPI confirmation screen",
+        "type": "upi",
+        "message": {
+          "from": "Your UPI App",
+          "text": "You are about to PAY Rs. 4,999 to XYZ (UPI: xyz@upi).",
+          "note": "The screen clearly shows that money will be debited from your account."
+        },
+        "options": [
+          {
+            "id": "approve-payment",
+            "label": "Enter UPI PIN and approve payment",
+            "riskImpact": 50,
+            "riskLevel": "Dangerous",
+            "isCorrect": false,
+            "explanation": "Entering your UPI PIN confirms you are sending money. Scam is successful.",
+            "redFlagKeys": ["upi-pin"]
+          },
+          {
+            "id": "cancel-transaction",
+            "label": "Cancel the transaction after reading the screen carefully",
+            "riskImpact": 0,
+            "riskLevel": "Safe",
+            "isCorrect": true,
+            "explanation": "Always read UPI confirmation screens. If it says you are paying, cancel immediately.",
+            "redFlagKeys": ["read-screen"]
+          }
+        ]
+      }
+    ],
+    "preventionTips": [
+      "Remember: To receive money by UPI, you do NOT need to enter your UPI PIN.",
+      "Never scan QR codes sent by strangers to receive money.",
+      "Read UPI confirmation screens carefully before entering your PIN.",
+      "For refunds, trust only official apps/websites and automatic reversal messages."
+    ]
+  },
+  {
+    "id": "sms-whatsapp-kyc-expiry",
+    "title": "KYC Expiry / SIM Block SMS-WhatsApp Scam",
+    "scamType": "SMS / WhatsApp",
+    "description": "A message claims your SIM or bank KYC will be blocked today unless you click a link or call a number.",
+    "psychologyTriggers": ["fear", "urgency", "authority"],
+    "steps": [
+      {
+        "id": 1,
+        "title": "Threatening SMS/WhatsApp message",
+        "type": "sms",
+        "message": {
+          "from": "VM-KYCUPD",
+          "text": "Dear Customer, your mobile SIM will be blocked today due to KYC failure. Click http://kyc-update-online.in or call 98XXXXXX21 immediately.",
+          "note": "Message uses government/bank-like tone and urgent deadline."
+        },
+        "options": [
+          {
+            "id": "click-link",
+            "label": "Click on the link in the message",
+            "riskImpact": 40,
+            "riskLevel": "Dangerous",
+            "isCorrect": false,
+            "explanation": "Links in such messages often lead to malware apps or fake KYC pages that steal your data.",
+            "redFlagKeys": ["unknown-link", "kyc-threat"]
+          },
+          {
+            "id": "call-number",
+            "label": "Call the number given in the message",
+            "riskImpact": 35,
+            "riskLevel": "Dangerous",
+            "isCorrect": false,
+            "explanation": "Scammers on call can trick you into installing remote-access apps or sharing OTPs.",
+            "redFlagKeys": ["unknown-number"]
+          },
+          {
+            "id": "check-official-app",
+            "label": "Open official telecom/bank app to check KYC status",
+            "riskImpact": 0,
+            "riskLevel": "Safe",
+            "isCorrect": true,
+            "explanation": "Using the official app or website is the safest way to see if any action is required.",
+            "redFlagKeys": ["verify-in-app"]
+          },
+          {
+            "id": "block-number",
+            "label": "Block the sender and delete the message",
+            "riskImpact": 0,
+            "riskLevel": "Safe",
+            "isCorrect": true,
+            "explanation": "Blocking stops further scam attempts from the same sender.",
+            "redFlagKeys": ["block-sender"]
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Follow-up after clicking",
+        "type": "sms",
+        "message": {
+          "from": "Fake KYC Page",
+          "text": "Page asks for your Aadhaar number, PAN, full date of birth and OTP sent to your phone.",
+          "note": "Design uses logos of major banks and telecom operators."
+        },
+        "options": [
+          {
+            "id": "enter-details",
+            "label": "Enter Aadhaar, PAN and OTP to complete KYC",
+            "riskImpact": 50,
+            "riskLevel": "Dangerous",
+            "isCorrect": false,
+            "explanation": "Sharing these details can lead to identity theft and SIM swap fraud.",
+            "redFlagKeys": ["asks-otp", "asks-personal-info"]
+          },
+          {
+            "id": "exit-and-reset",
+            "label": "Close the page and consider resetting phone and changing passwords",
+            "riskImpact": 0,
+            "riskLevel": "Safe",
+            "isCorrect": true,
+            "explanation": "If you clicked by mistake, exiting quickly and updating passwords reduces damage.",
+            "redFlagKeys": ["incident-response"]
+          }
+        ]
+      }
+    ],
+    "preventionTips": [
+      "Official KYC reminders usually come from verified IDs or within your provider's app.",
+      "Do not click links from unknown senders about KYC, refunds or lottery.",
+      "Never share OTPs, Aadhaar or PAN details over random links or calls.",
+      "If worried, call customer care using the number on official website or app."
+    ]
+  }
+]

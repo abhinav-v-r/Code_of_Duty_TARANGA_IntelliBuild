@@ -1,0 +1,161 @@
+{
+  "id": "upi-qr-lab",
+  "name": "UPI / QR Refund Scam Lab",
+  "type": "upi-qr-lab",
+  "difficulty": "beginner",
+  "summary": "Experience a WhatsApp conversation where a 'customer support' agent sends you a QR code to 'receive' a refund. This is one of India's most common scams.",
+  "environment": {
+    "chat": {
+      "participants": [
+        "You",
+        "Online Seller"
+      ],
+      "messages": [
+        {
+          "id": "m1",
+          "from": "Online Seller",
+          "text": "Hello sir, I am calling from ABC Store customer support. Our records show that you were charged twice for your recent order.",
+          "timestamp": "11:02"
+        },
+        {
+          "id": "m2",
+          "from": "Online Seller",
+          "text": "We sincerely apologize for this inconvenience. To process your refund of Rs. 4,999 immediately, please scan the QR code I am sending.",
+          "timestamp": "11:02"
+        },
+        {
+          "id": "m3",
+          "from": "Online Seller",
+          "text": "Sir, I am on shift closing in 2 minutes. If you don't scan now, the refund request will be cancelled and you will have to wait 7-10 business days for manual processing.",
+          "timestamp": "11:03"
+        }
+      ],
+      "quickReplies": [
+        {
+          "id": "qr-okay",
+          "text": "Okay, I will scan now."
+        },
+        {
+          "id": "ask-how",
+          "text": "Why do I need to scan QR to receive money?"
+        },
+        {
+          "id": "refuse",
+          "text": "No, I will wait for normal refund."
+        }
+      ]
+    },
+    "qr": {
+      "id": "refund-qr",
+      "amount": 4999,
+      "note": "Refund for double charge - Scan to receive",
+      "image": "qr-refund.png"
+    },
+    "upiApproval": {
+      "id": "upi-approval",
+      "appName": "BHIM UPI",
+      "to": "XYZ STORE (merchant_xyz@upi)",
+      "amount": 4999,
+      "message": "You are PAYING Rs. 4,999 to XYZ STORE. Enter UPI PIN to confirm."
+    }
+  },
+  "traps": [
+    {
+      "id": "agreed-to-scan",
+      "category": "social-engineering",
+      "description": "You agreed to scan a QR code to 'receive' money without questioning the process.",
+      "severity": 20,
+      "triggerEvents": [
+        {
+          "type": "send-chat",
+          "replyId": "qr-okay"
+        }
+      ]
+    },
+    {
+      "id": "scanned-qr-to-receive",
+      "category": "upi-qr-refund",
+      "description": "You scanned a QR code thinking you would receive money.",
+      "severity": 35,
+      "triggerEvents": [
+        {
+          "type": "scan-qr",
+          "qrId": "refund-qr"
+        }
+      ]
+    },
+    {
+      "id": "approved-upi-payment",
+      "category": "upi-pin",
+      "description": "You approved a payment to the scammer instead of receiving money.",
+      "severity": 50,
+      "triggerEvents": [
+        {
+          "type": "approve-upi",
+          "upiId": "upi-approval"
+        }
+      ]
+    },
+    {
+      "id": "questioned-process",
+      "category": "good-action",
+      "description": "You questioned why scanning a QR is needed to receive money.",
+      "severity": -15,
+      "triggerEvents": [
+        {
+          "type": "send-chat",
+          "replyId": "ask-how"
+        }
+      ]
+    },
+    {
+      "id": "resisted-pressure",
+      "category": "good-action",
+      "description": "You refused to scan and decided to wait for the normal refund process.",
+      "severity": -25,
+      "triggerEvents": [
+        {
+          "type": "send-chat",
+          "replyId": "refuse"
+        }
+      ]
+    },
+    {
+      "id": "declined-upi",
+      "category": "good-action",
+      "description": "You cancelled the UPI payment after seeing the confirmation screen.",
+      "severity": -20,
+      "triggerEvents": [
+        {
+          "type": "decline-upi",
+          "upiId": "upi-approval"
+        }
+      ]
+    }
+  ],
+  "debrief": {
+    "realWorldConsequences": [
+      "The money would instantly leave your account and go to the scammer – UPI transactions are irreversible.",
+      "Scammers who get your UPI PIN can potentially make multiple transactions before you realize.",
+      "If you share your UPI PIN on call or screen share, scammers can empty your entire account.",
+      "Some scammers use this access to take instant loans in your name, leaving you with debt.",
+      "Your bank cannot reverse UPI payments made with your PIN – you authorized the transaction."
+    ],
+    "preventionTips": [
+      "GOLDEN RULE: To RECEIVE money by UPI, you NEVER need to enter your UPI PIN. PIN is only for SENDING money.",
+      "QR codes are used to PAY someone, not to receive money. Don't scan QR codes from unknown sources.",
+      "Always read the UPI confirmation screen carefully – it clearly shows if you are PAYING or RECEIVING.",
+      "Legitimate refunds are processed automatically by companies – you don't need to 'do' anything to receive them.",
+      "If someone pressures you with 'time running out' or 'shift ending', it's almost definitely a scam.",
+      "Never share your UPI PIN, OTP, or CVV with anyone – not even bank employees or customer support."
+    ],
+    "redFlagHints": {
+      "agreed-to-scan": "Legitimate refunds don't require you to scan anything. The company processes refunds on their end.",
+      "scanned-qr-to-receive": "UPI QR codes are designed for PAYMENTS. There's no such thing as a 'receive money' QR code.",
+      "approved-upi-payment": "The UPI screen clearly showed 'You are PAYING Rs. 4,999' – but urgency made you ignore it.",
+      "questioned-process": "Asking questions is the right approach. Scammers rely on people not questioning their stories.",
+      "resisted-pressure": "You didn't give in to the urgency and pressure tactics – this is excellent scam awareness.",
+      "declined-upi": "You read the confirmation screen and caught the scam at the last moment – well done!"
+    }
+  }
+}

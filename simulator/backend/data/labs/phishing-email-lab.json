@@ -1,0 +1,157 @@
+{
+  "id": "phishing-email-lab",
+  "name": "Phishing Email Lab",
+  "type": "email-lab",
+  "difficulty": "beginner",
+  "summary": "Navigate a realistic email inbox containing safe and phishing emails. Can you spot the fake bank KYC email before it's too late?",
+  "environment": {
+    "inbox": [
+      {
+        "id": "promo-safe-1",
+        "fromName": "ShopKart",
+        "fromAddress": "offers@shopkart.in",
+        "subject": "Festive offer: 10% off on selected items",
+        "snippet": "Use code SAFE10 at checkout for exclusive savings...",
+        "receivedAt": "09:45",
+        "folder": "Inbox",
+        "isPhishing": false,
+        "body": "Hi there,\n\nEnjoy 10% off on selected items this festive season!\n\nUse code SAFE10 at checkout.\n\nOffer valid till 31st January 2026.\n\nHappy Shopping!\nShopKart Team",
+        "links": []
+      },
+      {
+        "id": "bank-kyc-phish",
+        "fromName": "State Bank of Bharat",
+        "fromAddress": "support@sbbank-secure.com",
+        "subject": "⚠️ URGENT: Your KYC will be blocked in 24 hours",
+        "snippet": "As per RBI guidelines your KYC is expiring today. Immediate action required...",
+        "receivedAt": "10:25",
+        "folder": "Inbox",
+        "isPhishing": true,
+        "body": "Dear Valued Customer,\n\nAs per the latest RBI guidelines, your KYC verification is expiring TODAY.\n\nIf you do not update your KYC within the next 24 HOURS, your account will be:\n• Blocked for all transactions\n• Reported to credit bureaus\n• Subject to account closure\n\nTo avoid disruption of banking services, please verify your identity immediately by clicking the secure link below.\n\nThis is an automated security message. Please do not reply to this email.\n\nRegards,\nState Bank of Bharat\nCustomer Security Team",
+        "links": [
+          {
+            "id": "verify-link",
+            "label": "🔒 Verify My KYC Now",
+            "url": "https://sbbank-secure.com/verify-kyc",
+            "isMalicious": true
+          }
+        ]
+      },
+      {
+        "id": "welcome-safe",
+        "fromName": "MyPay Wallet",
+        "fromAddress": "no-reply@mypay.in",
+        "subject": "Welcome to MyPay Wallet! 🎉",
+        "snippet": "Thanks for creating your account. Get started with your first transfer...",
+        "receivedAt": "10:12",
+        "folder": "Inbox",
+        "isPhishing": false,
+        "body": "Dear Customer,\n\nWelcome to MyPay Wallet!\n\nYour account has been successfully created. You can now:\n• Send money instantly\n• Pay bills\n• Recharge mobile\n• Shop online\n\nDownload our app from official app stores to get started.\n\nThank you for choosing MyPay!\n\nMyPay Team",
+        "links": []
+      },
+      {
+        "id": "ott-newsletter",
+        "fromName": "StreamFlix",
+        "fromAddress": "newsletter@streamflix.com",
+        "subject": "New releases this week on StreamFlix",
+        "snippet": "Check out the latest movies and shows added this week...",
+        "receivedAt": "08:30",
+        "folder": "Inbox",
+        "isPhishing": false,
+        "body": "Hi there,\n\nHere's what's new on StreamFlix this week:\n\n🎬 Action: Thunder Force 3\n🎭 Drama: The Last Promise\n😂 Comedy: Office Chaos S2\n\nStart watching now!\n\nStreamFlix Team",
+        "links": []
+      },
+      {
+        "id": "delivery-notification",
+        "fromName": "QuickDeliver",
+        "fromAddress": "tracking@quickdeliver.in",
+        "subject": "Your package is out for delivery",
+        "snippet": "Your order #QD789456 will be delivered today between 2-6 PM...",
+        "receivedAt": "11:00",
+        "folder": "Inbox",
+        "isPhishing": false,
+        "body": "Hello,\n\nGreat news! Your package is out for delivery.\n\nOrder ID: #QD789456\nDelivery Window: Today, 2:00 PM - 6:00 PM\n\nPlease ensure someone is available to receive the package.\n\nThank you for shopping with us!\n\nQuickDeliver Team",
+        "links": []
+      }
+    ],
+    "loginPage": {
+      "id": "fake-bank-login",
+      "url": "https://sbbank-secure.com/verify-kyc",
+      "padlock": true,
+      "title": "State Bank of Bharat - NetBanking",
+      "fields": [
+        { "id": "user-id", "label": "User ID / Account Number", "type": "text" },
+        { "id": "password", "label": "Password / PIN", "type": "password" }
+      ]
+    }
+  },
+  "traps": [
+    {
+      "id": "clicked-phishing-link",
+      "category": "phishing-link",
+      "description": "You clicked on a suspicious link from an unknown sender claiming to be your bank.",
+      "severity": 35,
+      "triggerEvents": [
+        { "type": "click-link", "messageId": "bank-kyc-phish", "linkId": "verify-link" }
+      ]
+    },
+    {
+      "id": "submitted-creds-on-fake-site",
+      "category": "credential-theft",
+      "description": "You entered your banking credentials on a fake login page.",
+      "severity": 45,
+      "triggerEvents": [
+        { "type": "submit-login", "loginPageId": "fake-bank-login" }
+      ]
+    },
+    {
+      "id": "ignored-sender-and-url",
+      "category": "ignored-red-flags",
+      "description": "You clicked the phishing link without inspecting the sender's email address first.",
+      "severity": 20,
+      "triggerEvents": [
+        { "type": "derived", "rule": "clicked-phishing-link-without-any-inspect" }
+      ]
+    },
+    {
+      "id": "reported-phishing",
+      "category": "good-action",
+      "description": "You correctly identified and reported the phishing email.",
+      "severity": -20,
+      "triggerEvents": [
+        { "type": "report-email", "messageId": "bank-kyc-phish" }
+      ]
+    },
+    {
+      "id": "inspected-sender",
+      "category": "good-action",
+      "description": "You inspected the sender's email address before taking action.",
+      "severity": -10,
+      "triggerEvents": [
+        { "type": "inspect-sender", "messageId": "bank-kyc-phish" }
+      ]
+    }
+  ],
+  "debrief": {
+    "realWorldConsequences": [
+      "Attackers could steal your bank username and password, gaining full access to your account.",
+      "Your account could be emptied within minutes of entering your credentials.",
+      "Your personal information could be sold on the dark web and used for identity theft.",
+      "Scammers might use your account for money laundering, making you legally liable."
+    ],
+    "preventionTips": [
+      "Never click on bank links from email or SMS. Always type the official bank URL manually in your browser.",
+      "Check the sender's full email address, not just the display name. Banks use official domains like @sbi.co.in, not @sbbank-secure.com.",
+      "Banks and RBI never threaten to block accounts via email. They send official letters or communicate through the app.",
+      "Look for urgency language like 'URGENT', '24 hours', 'immediately' – these are classic scam tactics.",
+      "When in doubt, call your bank's official customer care number (from the back of your card, not from the email)."
+    ],
+    "redFlagHints": {
+      "clicked-phishing-link": "The domain 'sbbank-secure.com' is not the official State Bank domain. Real bank domains are verified and well-known.",
+      "submitted-creds-on-fake-site": "Legitimate banks never ask you to enter your full password on unfamiliar websites. They use OTP verification on their official app.",
+      "ignored-sender-and-url": "Always hover over links and inspect sender addresses. The actual email address often reveals the scam.",
+      "reported-phishing": "Reporting suspicious emails helps protect other users and trains spam filters.",
+      "inspected-sender": "Checking the sender address is a crucial first step in identifying phishing attempts."
+    }
+  }
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "id": "phishing-email-lab",
+    "name": "Phishing Email Lab",
+    "summary": "Practice spotting KYC and refund phishing emails in a realistic inbox.",
+    "type": "email-lab",
+    "difficulty": "beginner"
+  },
+  {
+    "id": "fake-website-lab",
+    "name": "Fake Shopping Website Lab",
+    "summary": "Explore a too-good-to-be-true shopping site and see hidden red flags.",
+    "type": "fake-website-lab",
+    "difficulty": "beginner"
+  },
+  {
+    "id": "upi-qr-lab",
+    "name": "UPI / QR Refund Scam Lab",
+    "summary": "Chat with a scammer and see how QR and UPI approval screens can trick you.",
+    "type": "upi-qr-lab",
+    "difficulty": "beginner"
+  }
+]
