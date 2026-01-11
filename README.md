@@ -101,19 +101,19 @@ Kaaval-AI/
 
 ### 1. Kaaval AI Main Platform
 The central hub for scam analysis featuring a premium glassmorphic interface and real-time AI risk assessment.
-![screenshots/Screenshot 2026-01-11 112029.png](screenshots/Screenshot 2026-01-11 112029.png)
+![screenshots/Screenshot 2026-01-11 112029.png](screenshots/main_page.png)
 
 ### 2. DISHA AI Assistant
 A multi-lingual, voice-enabled safe-browsing companion for seniors.
-![screenshots/Screenshot 2026-01-11 112029.png](Screenshot 2026-01-11 112059.png)
+![screenshots/Screenshot 2026-01-11 112029.png](screenshots/disha_ai.png)
 
 ### 3. CyberGuardian.AI Labs
 Interactive simulation environments where users learn to identify UPI and banking scams.
-![screenshots/Screenshot 2026-01-11 112029.png](Screenshot 2026-01-11 112234.png)
+![screenshots/Screenshot 2026-01-11 112029.png](screenshots/labs.png)
 
 ### 4. SentinelX Guardian Pro
 The browser extension actively blocking a suspicious phishing website.
-![screenshots/Screenshot 2026-01-11 112029.png](Screenshot 2026-01-11 112308.png)
+![screenshots/Screenshot 2026-01-11 112029.png](screenshots/sentinelx.png)
 
 *(Screenshots are located in the relevant project subdirectories and documentation)*
 
