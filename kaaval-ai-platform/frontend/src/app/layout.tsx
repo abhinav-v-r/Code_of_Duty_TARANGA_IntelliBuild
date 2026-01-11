@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Inter, Outfit, Poppins, Playfair_Display, Space_Grotesk } from "next/font/google"
 import "./globals.css"
+import FloatingChatbot from "@/components/chatbot/FloatingChatbot"
 
 const inter = Inter({
     subsets: ["latin"],
@@ -75,6 +76,7 @@ export default function RootLayout({
         <html lang="en" suppressHydrationWarning>
             <body className={`${inter.variable} ${outfit.variable} ${poppins.variable} ${playfair.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
                 {children}
+                <FloatingChatbot />
             </body>
         </html>
     )

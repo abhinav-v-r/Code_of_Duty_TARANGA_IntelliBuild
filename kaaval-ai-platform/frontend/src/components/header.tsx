@@ -14,7 +14,9 @@ import {
     BookOpen,
     BarChart3,
     HelpCircle,
-    Sparkles
+    Sparkles,
+    Download,
+    Chrome
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -56,11 +58,10 @@ export function Header() {
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-                isScrolled
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
                     ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg shadow-lg border-b border-primary/10'
                     : 'bg-transparent'
-            }`}
+                }`}
         >
             <nav className="container mx-auto px-4 py-4">
                 <div className="flex items-center justify-between">
@@ -126,6 +127,17 @@ export function Header() {
                             </Button>
                         </motion.div>
                         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                            <a href="/downloads/sentinelx-guardian-pro.zip" download>
+                                <Button
+                                    variant="outline"
+                                    className="border-2 border-green-500 text-green-600 hover:bg-green-50 dark:hover:bg-green-950/30 font-semibold"
+                                >
+                                    <Chrome className="w-4 h-4 mr-2" />
+                                    Get Extension
+                                </Button>
+                            </a>
+                        </motion.div>
+                        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                             <Button
                                 variant="gradient"
                                 className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-700 hover:via-purple-700 hover:to-pink-700 text-white shadow-lg"
@@ -184,6 +196,15 @@ export function Header() {
                                 )
                             })}
                             <div className="pt-4 border-t border-border space-y-2">
+                                <a href="/downloads/sentinelx-guardian-pro.zip" download className="block">
+                                    <Button
+                                        variant="outline"
+                                        className="w-full border-2 border-green-500 text-green-600 hover:bg-green-50"
+                                    >
+                                        <Chrome className="w-4 h-4 mr-2" />
+                                        Download Extension
+                                    </Button>
+                                </a>
                                 <Button
                                     variant="gradient"
                                     className="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600"
