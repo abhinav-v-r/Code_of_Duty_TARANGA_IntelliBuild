@@ -61,11 +61,12 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
-  
+
   html {
     scroll-behavior: smooth;
   }
@@ -75,11 +76,11 @@
   .text-balance {
     text-wrap: balance;
   }
-  
+
   .gradient-primary {
     background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   }
-  
+
   .gradient-trust {
     background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
   }
@@ -101,14 +102,14 @@
     background-size: 300% 300%;
     animation: gradient-shift 10s ease infinite;
   }
-  
+
   .glass-effect {
     background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.3);
   }
-  
+
   .dark .glass-effect {
     background: rgba(30, 41, 59, 0.7);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -120,18 +121,20 @@
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.2);
   }
-  
+
+  .animate-shimmer {
+    animation: shimmer 2s linear infinite;
+  }
+
   .shimmer-bg {
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.3),
-      transparent
-    );
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent);
     background-size: 200% 100%;
     animation: shimmer 2s infinite;
   }
-  
+
   .card-hover {
     @apply transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02];
   }
@@ -140,7 +143,7 @@
     transform-style: preserve-3d;
     perspective: 1000px;
   }
-  
+
   .focus-ring {
     @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
   }
@@ -216,9 +219,12 @@
 
 /* Enhanced Animations */
 @keyframes gradient-shift {
-  0%, 100% {
+
+  0%,
+  100% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
@@ -228,24 +234,31 @@
   0% {
     background-position: -1000px 0;
   }
+
   100% {
     background-position: 1000px 0;
   }
 }
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-20px);
   }
 }
 
 @keyframes wiggle {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: rotate(-3deg);
   }
+
   50% {
     transform: rotate(3deg);
   }
@@ -256,6 +269,7 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -267,6 +281,7 @@
     opacity: 0;
     transform: scale(0.9);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -278,6 +293,7 @@
     opacity: 0;
     transform: translateX(50px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -289,6 +305,7 @@
     opacity: 0;
     transform: translateX(-50px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -296,9 +313,12 @@
 }
 
 @keyframes glow {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
   }
+
   50% {
     box-shadow: 0 0 40px rgba(168, 85, 247, 0.8);
   }

@@ -80,10 +80,10 @@ export function HeroSection() {
                     }}
                     className="absolute bottom-20 left-20 w-[500px] h-[500px] bg-gradient-to-r from-pink-400/20 via-purple-400/20 to-blue-400/20 rounded-full blur-3xl"
                 />
-                
+
                 {/* Grid Pattern */}
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] opacity-40" />
-                
+
                 {/* Decorative Shapes */}
                 <motion.div
                     animate={{ rotate: [0, 360] }}
@@ -152,10 +152,10 @@ export function HeroSection() {
                     {/* Sub-headline */}
                     <motion.p
                         variants={itemVariants}
-                        className="text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed font-medium"
+                        className="text-lg md:text-xl lg:text-2xl text-gray-700 dark:text-gray-200 max-w-3xl mx-auto leading-relaxed font-medium"
                     >
                         Protect yourself from online fraud with{' '}
-                        <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                        <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-purple-700 dark:from-blue-400 dark:to-purple-400">
                             advanced AI analysis
                         </span>
                         . Detect scams, learn digital safety, and stay secure in the digital world.

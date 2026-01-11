@@ -40,45 +40,79 @@ interface LanguageTextsMap {
   ml: LanguageTexts;
 }
 
-// Gemini API configuration
-const GEMINI_API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY || '';
+// JotForm API configuration
+const JOTFORM_API_KEY = process.env.NEXT_PUBLIC_JOTFORM_API_KEY || '';
+const JOTFORM_FORM_ID = process.env.NEXT_PUBLIC_JOTFORM_FORM_ID || '';
 
-async function getGeminiResponse(userMessage: string, language: 'en' | 'ml'): Promise<string> {
-  if (!GEMINI_API_KEY) {
-    throw new Error('Gemini API key not configured');
+/**
+ * Submit user message to JotForm
+ * Note: JotForm API requires the form structure to match field IDs
+ * You'll need to map your form fields accordingly
+ */
+async function submitToJotForm(userMessage: string, language: 'en' | 'ml'): Promise<string> {
+  if (!JOTFORM_API_KEY) {
+    throw new Error('JotForm API key not configured. Please set NEXT_PUBLIC_JOTFORM_API_KEY in your .env.local file');
+  }
+
+  if (!JOTFORM_FORM_ID) {
+    throw new Error('JotForm Form ID not configured. Please set NEXT_PUBLIC_JOTFORM_FORM_ID in your .env.local file');
   }
 
   try {
-    const { GoogleGenerativeAI } = await import('@google/generative-ai');
-    const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({
-      model: 'gemini-2.0-flash',
-      safetySettings: [
-        { category: 'HARM_CATEGORY_HARASSMENT' as any, threshold: 'BLOCK_MEDIUM_AND_ABOVE' as any },
-        { category: 'HARM_CATEGORY_HATE_SPEECH' as any, threshold: 'BLOCK_MEDIUM_AND_ABOVE' as any },
-        { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT' as any, threshold: 'BLOCK_MEDIUM_AND_ABOVE' as any },
-        { category: 'HARM_CATEGORY_DANGEROUS_CONTENT' as any, threshold: 'BLOCK_MEDIUM_AND_ABOVE' as any }
-      ]
+    // JotForm API endpoint for submissions
+    // Note: Field IDs (3, 4, 5) need to match your JotForm form structure
+    // Check your form field IDs in JotForm form builder
+    const apiUrl = `https://api.jotform.com/form/${JOTFORM_FORM_ID}/submissions`;
+    
+    // Prepare submission data with field IDs
+    // Adjust field IDs to match your JotForm form fields
+    const submissionData: Record<string, string> = {
+      '3': userMessage, // Message/Question field - CHANGE THIS ID to match your form
+      '4': language === 'ml' ? 'Malayalam' : 'English', // Language field - CHANGE THIS ID
+    };
+
+    // Build form data
+    const formData = new FormData();
+    Object.keys(submissionData).forEach(key => {
+      formData.append(`submission[${key}]`, submissionData[key]);
     });
 
-    const languageInstruction = language === 'ml'
-      ? 'You are DISHA (Digital Information and Safety Help Assistant), the AI assistant for Kaaval AI - a platform dedicated to protecting seniors from online scams and fraud. Respond ONLY in Malayalam. Use simple, polite, and easy-to-understand sentences. Avoid technical jargon. Be friendly, patient, and respectful. Help users understand digital safety, identify scams, and stay secure online.'
-      : 'You are DISHA (Digital Information and Safety Help Assistant), the AI assistant for Kaaval AI - a platform dedicated to protecting seniors from online scams and fraud. Respond in English. Use simple, polite, and easy-to-understand sentences. Avoid technical jargon. Be friendly, patient, and respectful. Help users understand digital safety, identify scams, and stay secure online.';
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'APIKEY': JOTFORM_API_KEY
+      },
+      body: formData
+    });
 
-    const prompt = `${languageInstruction}\n\nUser: ${userMessage}\n\nAssistant:`;
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text();
-
-    if (!text) {
-      throw new Error('Empty response from Gemini');
+    if (!response.ok) {
+      const errorText = await response.text();
+      let errorData;
+      try {
+        errorData = JSON.parse(errorText);
+      } catch {
+        errorData = { message: errorText || `JotForm API error: ${response.status} ${response.statusText}` };
+      }
+      throw new Error(errorData.message || `JotForm API error: ${response.status} ${response.statusText}`);
     }
 
-    return text.trim();
+    const result = await response.json();
+    
+    // Return confirmation message based on language
+    if (language === 'ml') {
+      return 'നന്ദി! നിങ്ങളുടെ സന്ദേശം വിജയകരമായി സമർപ്പിച്ചു. ഞങ്ങൾ ഉടൻ തന്നെ നിങ്ങളോട് ബന്ധപ്പെടും.';
+    } else {
+      return 'Thank you! Your message has been submitted successfully. We will get back to you soon.';
+    }
   } catch (error: any) {
-    console.error('Gemini API Error:', error);
-    throw new Error(error.message || 'Failed to get response from Gemini');
+    console.error('JotForm API Error:', error);
+    throw new Error(error.message || 'Failed to submit to JotForm');
   }
+}
+
+// Alias function for backward compatibility with existing code
+async function getGeminiResponse(userMessage: string, language: 'en' | 'ml'): Promise<string> {
+  return submitToJotForm(userMessage, language);
 }
 
 function FloatingChatbot() {
@@ -351,13 +385,17 @@ function FloatingChatbot() {
       if (isVoiceEnabled) {
         speakText(response, selectedLanguage);
       }
-    } catch (error) {
-      console.error('Error getting Gemini response:', error);
+    } catch (error: any) {
+      console.error('Error submitting to JotForm:', error);
+      
+      // Error message for JotForm submission failures
+      const errorText = selectedLanguage === 'en'
+        ? "I apologize, but I'm having trouble submitting your message right now. Please try again in a moment, or contact us directly if the problem persists."
+        : "ക്ഷമിക്കണം, നിങ്ങളുടെ സന്ദേശം സമർപ്പിക്കുന്നതിൽ എനിക്ക് പ്രശ്നമുണ്ട്. ദയവായി കുറച്ച് നേരത്തിന് ശേഷം വീണ്ടും ശ്രമിക്കുക, അല്ലെങ്കിൽ പ്രശ്നം തുടരുകയാണെങ്കിൽ ഞങ്ങളെ നേരിട്ട് ബന്ധപ്പെടുക.";
+      
       const errorMessage: Message = {
         id: Date.now() + 1,
-        text: selectedLanguage === 'en'
-          ? "I apologize, but I'm having trouble right now. Please try again in a moment."
-          : "ക്ഷമിക്കണം, എനിക്ക് ഇപ്പോൾ പ്രശ്നമുണ്ട്. ദയവായി കുറച്ച് നേരത്തിന് ശേഷം വീണ്ടും ശ്രമിക്കുക.",
+        text: errorText,
         sender: 'bot',
         timestamp: new Date(),
       };

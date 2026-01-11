@@ -330,15 +330,5 @@ function showError(message) {
 }
 
 function animateIn() {
-  const elements = document.querySelectorAll('.threat-card, .threat-item');
-  elements.forEach((el, index) => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(10px)';
-
-    setTimeout(() => {
-      el.style.transition = 'all 0.3s ease';
-      el.style.opacity = '1';
-      el.style.transform = 'translateY(0)';
-    }, index * 50);
-  });
+  // Animations are now handled via CSS for better reliability and performance
 }

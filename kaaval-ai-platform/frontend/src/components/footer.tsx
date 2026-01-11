@@ -38,21 +38,22 @@ export function Footer() {
         ],
         resources: [
             { label: 'Learning Center', href: '#education' },
+            { label: 'Blog', href: 'http://localhost:5173', external: true },
             { label: 'Scam Analyzer', href: '#scam-analyzer' },
             { label: 'Features', href: '#features' },
             { label: 'Impact Stats', href: '#impact' },
         ],
         legal: [
-            { label: 'Privacy Policy', href: '/', icon: Lock },
-            { label: 'Terms of Service', href: '/', icon: FileText },
-            { label: 'Cookie Policy', href: '/' },
+            { label: 'Privacy Policy', href: '#' },
+            { label: 'Terms of Service', href: '#' },
+            { label: 'Cookie Policy', href: '#' },
             { label: 'Data Protection', href: '/', icon: Shield },
         ],
         support: [
             { label: 'Help Center', href: '#education' },
             { label: 'Report a Scam', href: '#scam-analyzer' },
-            { label: 'Contact Us', href: '/' },
-            { label: 'Status', href: '/' },
+            { label: 'Contact Us', href: 'mailto:security@kaavalai.com' },
+            { label: 'Status', href: '#impact' },
         ],
     }
 
@@ -132,18 +133,32 @@ export function Footer() {
                         <div>
                             <h3 className="font-semibold mb-4 text-foreground">Resources</h3>
                             <ul className="space-y-3">
-                                {footerLinks.resources.map((link, index) => (
-                                    <li key={index}>
-                                        <a
-                                            href={link.href}
-                                            onClick={(e) => handleLinkClick(link.href, e)}
-                                            className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer flex items-center gap-2 group"
-                                        >
-                                            <span className="w-1 h-1 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
-                                            {link.label}
-                                        </a>
-                                    </li>
-                                ))}
+                                {footerLinks.resources.map((link, index) => {
+                                    const isExternal = link.href.startsWith('http')
+                                    // Blog redirects in same tab, other external links open in new tab
+                                    const isBlog = link.href === 'http://localhost:5173'
+                                    return (
+                                        <li key={index}>
+                                            <a
+                                                href={link.href}
+                                                onClick={(e) => {
+                                                    if (isBlog) {
+                                                        e.preventDefault()
+                                                        window.location.href = link.href
+                                                    } else {
+                                                        handleLinkClick(link.href, e)
+                                                    }
+                                                }}
+                                                target={isExternal && !isBlog ? '_blank' : undefined}
+                                                rel={isExternal && !isBlog ? 'noopener noreferrer' : undefined}
+                                                className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer flex items-center gap-2 group"
+                                            >
+                                                <span className="w-1 h-1 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                                                {link.label}
+                                            </a>
+                                        </li>
+                                    )
+                                })}
                             </ul>
                         </div>
 

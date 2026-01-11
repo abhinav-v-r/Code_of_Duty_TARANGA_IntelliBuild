@@ -1,0 +1,538 @@
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 2000;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 20px;
+    overflow-y: auto;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-container {
+    width: 100%;
+    max-width: 800px;
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    position: relative;
+    animation: slideUp 0.4s ease;
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+    background: var(--danger);
+    border-color: var(--danger);
+    transform: rotate(90deg);
+}
+
+.modal-close svg {
+    width: 24px;
+    height: 24px;
+}
+
+.modal-header {
+    position: relative;
+    height: 300px;
+}
+
+.modal-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal-header-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, var(--bg-dark) 0%, transparent 50%);
+    display: flex;
+    align-items: flex-end;
+    padding: 24px;
+}
+
+.modal-category {
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
+}
+
+.modal-content {
+    padding: 32px;
+}
+
+.modal-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+
+.meta-dot {
+    color: var(--border-color);
+}
+
+.modal-title {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 24px;
+}
+
+/* Google Style Rating Box */
+.modal-rating-box {
+    display: flex;
+    gap: 32px;
+    padding: 24px;
+    background: rgba(250, 204, 21, 0.08);
+    border: 1px solid rgba(250, 204, 21, 0.2);
+    border-radius: var(--radius-lg);
+    margin-bottom: 28px;
+}
+
+.rating-left {
+    text-align: center;
+    padding-right: 32px;
+    border-right: 1px solid rgba(250, 204, 21, 0.2);
+}
+
+.rating-big {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1;
+}
+
+.rating-stars-container {
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+    margin: 8px 0;
+}
+
+.rating-stars-container .star {
+    width: 20px;
+    height: 20px;
+}
+
+.rating-reviews {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.rating-bars {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    justify-content: center;
+}
+
+.rating-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.rating-bar-row span {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    width: 12px;
+}
+
+.rating-bar {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.rating-bar-fill {
+    height: 100%;
+    background: #facc15;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.star.filled {
+    color: #facc15;
+}
+
+.star.empty {
+    color: #3f3f46;
+}
+
+.star.interactive {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.star.interactive:hover {
+    transform: scale(1.2);
+}
+
+.modal-author {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    margin-bottom: 32px;
+}
+
+.modal-author .author-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: white;
+}
+
+.author-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.author-details .author-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.verified-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.author-details .author-role {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.follow-btn {
+    padding: 10px 24px;
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: var(--radius-md);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.follow-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+}
+
+.modal-body {
+    margin-bottom: 32px;
+}
+
+.content-heading {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-light);
+    margin: 24px 0 12px;
+}
+
+.content-paragraph {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 12px;
+}
+
+.content-bullet {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-left: 20px;
+    margin-bottom: 8px;
+    list-style: none;
+    position: relative;
+}
+
+.content-bullet::before {
+    content: '•';
+    position: absolute;
+    left: -16px;
+    color: var(--primary);
+}
+
+.modal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 32px;
+}
+
+.tag {
+    padding: 6px 14px;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-color);
+    border-radius: 100px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+}
+
+.tag:hover {
+    border-color: var(--primary);
+    color: var(--primary-light);
+}
+
+/* User Review Section */
+.user-review-section {
+    padding: 28px;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.user-review-section h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.user-review-section>p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+.user-rating-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.user-rating-container .star {
+    width: 36px;
+    height: 36px;
+}
+
+.rating-label {
+    font-size: 0.9rem;
+    color: #facc15;
+    font-weight: 600;
+}
+
+.write-review-btn {
+    padding: 12px 28px;
+    background: transparent;
+    border: 2px solid var(--primary);
+    border-radius: var(--radius-md);
+    color: var(--primary-light);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.write-review-btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.review-form {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.review-form textarea {
+    width: 100%;
+    padding: 16px;
+    background: var(--bg-darker);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 1rem;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+}
+
+.review-form textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.review-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.cancel-btn {
+    padding: 10px 20px;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cancel-btn:hover {
+    border-color: var(--danger);
+    color: var(--danger);
+}
+
+.submit-btn {
+    padding: 10px 24px;
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: var(--radius-md);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    flex: 1;
+    min-width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 20px;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+    background: var(--bg-card-hover);
+    color: var(--text-primary);
+    border-color: var(--border-hover);
+}
+
+.action-btn.share:hover {
+    background: rgba(99, 102, 241, 0.15);
+    border-color: var(--primary);
+    color: var(--primary-light);
+}
+
+.action-btn.bookmark:hover {
+    background: rgba(245, 158, 11, 0.15);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.action-btn.report:hover {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: var(--danger);
+    color: var(--danger);
+}
+
+.action-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+@media (max-width: 768px) {
+    .modal-backdrop {
+        padding: 20px 12px;
+    }
+
+    .modal-header {
+        height: 200px;
+    }
+
+    .modal-content {
+        padding: 24px 20px;
+    }
+
+    .modal-title {
+        font-size: 1.5rem;
+    }
+
+    .modal-rating-box {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .rating-left {
+        border-right: none;
+        border-bottom: 1px solid rgba(250, 204, 21, 0.2);
+        padding-right: 0;
+        padding-bottom: 20px;
+    }
+
+    .modal-author {
+        flex-wrap: wrap;
+    }
+
+    .follow-btn {
+        width: 100%;
+        margin-top: 8px;
+    }
+
+    .user-rating-container .star {
+        width: 28px;
+        height: 28px;
+    }
+}

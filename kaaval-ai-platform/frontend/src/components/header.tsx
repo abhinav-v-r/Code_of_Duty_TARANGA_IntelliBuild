@@ -17,7 +17,8 @@ import {
     Sparkles,
     Download,
     Chrome,
-    Target
+    Target,
+    FileText
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -38,14 +39,20 @@ export function Header() {
         { label: 'Features', href: '#features', icon: Sparkles },
         { label: 'Analyzer', href: '#scam-analyzer', icon: Search },
         { label: 'Learn', href: '#education', icon: BookOpen },
+        { label: 'Blog', href: 'http://localhost:5175', icon: FileText, external: true },
         { label: 'Sim Lab', href: 'http://localhost:5174', icon: Target, external: true },
         { label: 'Stats', href: '#impact', icon: BarChart3 },
-        { label: 'Help', href: '#education', icon: HelpCircle },
+        { label: 'Help', href: '#scam-analyzer', icon: HelpCircle },
     ]
 
     const scrollToSection = (href: string, external?: boolean) => {
         if (external) {
-            window.open(href, '_blank', 'noopener,noreferrer')
+            // Blog redirects in the same tab, Sim Lab opens in a new tab
+            if (href === 'http://localhost:5173') {
+                window.location.href = href
+            } else {
+                window.open(href, '_blank', 'noopener,noreferrer')
+            }
         } else if (href === '/' || href === '#') {
             window.scrollTo({ top: 0, behavior: 'smooth' })
         } else if (href.startsWith('#')) {
@@ -75,20 +82,36 @@ export function Header() {
                         whileTap={{ scale: 0.95 }}
                         className="flex items-center gap-3"
                     >
-                        <Link href="/" className="flex items-center gap-3 group">
+                        <Link href="/" className="flex items-center gap-4 group relative">
                             <div className="relative">
-                                <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-xl blur-md opacity-60 group-hover:opacity-80 transition-opacity" />
-                                <div className="relative w-12 h-12 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 rounded-xl flex items-center justify-center shadow-lg transform group-hover:rotate-6 transition-transform">
-                                    <Shield className="w-7 h-7 text-white" />
+                                {/* Enhanced Glow Effect */}
+                                <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-2xl blur-xl opacity-40 group-hover:opacity-70 transition-opacity duration-500" />
+
+                                {/* Logo Container */}
+                                <div className="relative w-14 h-14 p-[2px] rounded-2xl bg-gradient-to-br from-white/20 to-transparent backdrop-blur-sm overflow-hidden transform group-hover:scale-105 transition-all duration-500 shadow-2xl">
+                                    <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 opacity-90 group-hover:opacity-100 transition-opacity" />
+                                    <div className="relative h-full w-full bg-slate-900/50 rounded-[14px] flex items-center justify-center backdrop-blur-md">
+                                        <Shield className="w-8 h-8 text-white filter drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] transform group-hover:rotate-12 transition-transform duration-500" />
+                                    </div>
+
+                                    {/* Shimmer Effect */}
+                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer" />
                                 </div>
                             </div>
+
                             <div className="flex flex-col">
-                                <span className={`text-xl font-display font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent transition-colors ${isScrolled ? 'text-gray-900 dark:text-white' : 'text-white'}`}>
-                                    Kaaval AI
-                                </span>
-                                <span className="text-xs text-muted-foreground hidden sm:block">
-                                    Your Digital Shield
-                                </span>
+                                <div className="flex items-center gap-2">
+                                    <span className={`text-2xl font-display font-black tracking-tight bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent transition-all duration-300 drop-shadow-sm`}>
+                                        KAAVAL
+                                    </span>
+                                    <span className="text-2xl font-display font-light tracking-tighter text-slate-400/80">AI</span>
+                                </div>
+                                <div className="flex items-center gap-1.5 overflow-hidden h-4">
+                                    <div className="w-3 h-[1px] bg-gradient-to-r from-blue-500 to-transparent" />
+                                    <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60 whitespace-nowrap">
+                                        Digital Fortress
+                                    </span>
+                                </div>
                             </div>
                         </Link>
                         <Badge variant="outline" className="hidden lg:flex items-center gap-1 border-green-500/50 bg-green-50 dark:bg-green-950/30">
@@ -124,12 +147,6 @@ export function Header() {
 
                     {/* Action Buttons */}
                     <div className="hidden lg:flex items-center gap-3">
-                        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                            <Button variant="ghost" size="icon" className="relative">
-                                <Bell className="w-5 h-5" />
-                                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-                            </Button>
-                        </motion.div>
                         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                             <Link href="/demo">
                                 <Button
